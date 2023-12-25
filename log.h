@@ -50,6 +50,12 @@ public:
     // Contrat :
     //
 
+    log (string unlog);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     virtual ~log ( );
     // Mode d'emploi :
     //

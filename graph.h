@@ -23,6 +23,14 @@ class graph
 
 public:
 //----------------------------------------------------- Méthodes publiques
+    void ajouteNoeudAuDictionnaire(string refreur,string cible,string log);
+    // type Méthode ( liste des paramètres );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    vector<vector<string,int>> faitClassement();
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
@@ -61,7 +69,6 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
 
 private:

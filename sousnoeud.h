@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <log.h>
+#include <graph.h>
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -19,6 +20,8 @@ using namespace std;
 
 class sousnoeud
 {
+//----------------------------------------------------------------- AMITIE
+    friend class graph;
 //----------------------------------------------------------------- PUBLIC
 
 public:
@@ -41,6 +44,12 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     sousnoeud ( const sousnoeud & unsousnoeud );
     // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+    
+    sousnoeud(log unLog);
+    // Mode d'emploi :
     //
     // Contrat :
     //

@@ -6,6 +6,7 @@
 #include <map>
 #include <iostream>
 #include "sousnoeud.h"
+#include "graph.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -21,6 +22,8 @@ class noeud
 //----------------------------------------------------------------- PUBLIC
 
 public:
+//----------------------------------------------------- Amitié
+    friend class graph;
 //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
@@ -66,6 +69,7 @@ protected:
 private:
 //----------------------------------------------------- Méthodes privées
     map<string,sousnoeud> dictionnaire_sous_noeuds;
+    int hits;
     // il s'agit des ensembles de liens atteignables depuis une origine associée le sous noeud va contenir 
     // l'ensemble des logs communs aux deux ainsi que le nb de hits depuis la clé du dictionnaire vers le noeud
 
