@@ -1,80 +1,66 @@
 //---------- Interface de la classe <noeud> (fichier noeud.h) ----------------
-#if ! defined ( noeud_H )
+#if !defined(noeud_H)
 #define noeud_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
 #include <iostream>
-#include "sousnoeud.h"
 #include "graph.h"
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
+#include "sousnoeud.h"
 
 //------------------------------------------------------------------------
 // Rôle de la classe <noeud>
-//
-//
+// Cette classe permet de stocker les cibles atteignables depuis un réfreur 
+// donné qui est une clé du map de la classe graph
 //------------------------------------------------------------------------
 
 class noeud
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Amitié
-    friend class graph;
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-    noeud & operator = ( const noeud & unnoeud );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    noeud ( const noeud & unnoeud );
+    //----------------------------------------------------- Amitié
+    friend class graph; 
+    
+    //-------------------------------------------- Constructeurs - destructeur
+    noeud(const noeud &unnoeud);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    noeud ( );
+    noeud();
+    // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+
+    void ajouteSousNoeud(string cible, sousnoeud unSousNoeud);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~noeud ( );
+    virtual ~noeud();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+    //----------------------------------------------------- Méthodes protégées
 
-//----------------------------------------------------- Attributs protégés
+    //----------------------------------------------------- Attributs protégés
 
 private:
-//----------------------------------------------------- Méthodes privées
-    map<string,sousnoeud> dictionnaire_sous_noeuds;
-    int hits;
-    // il s'agit des ensembles de liens atteignables depuis une origine associée le sous noeud va contenir 
-    // l'ensemble des logs communs aux deux ainsi que le nb de hits depuis la clé du dictionnaire vers le noeud
-
-//----------------------------------------------------- Attributs privées
-
+    //----------------------------------------------------- Méthodes privées
+    map<string, sousnoeud> dictionnaire_sous_noeuds; // la clé ici est la cible depuis réfreur sous noaud contient les logs communs au réfreur et à la cible + nb de hits communs
+    int hits; // correspond au nb de hits total de la clé (oui elle est enregistrée dans noeud)
+    static int nbinstances; // permet de numéroter les insatnces de noeud pour la génération du graphe
+    int numinstance;
+    //----------------------------------------------------- Attributs privées
 };
 
 //-------------------------------- Autres définitions dépendantes de <noeud>

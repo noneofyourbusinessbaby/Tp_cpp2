@@ -5,17 +5,13 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <vector>
 #include <iostream>
-#include <log.h>
-#include <graph.h>
+#include "graph.h"
 using namespace std;
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
 // Rôle de la classe <sousnoeud>
-//
-//
+// Sous noeud permet de stocker les infos communes à une cible et un réfreur
+// donc le nb de hits commun au deux et les logs
 //------------------------------------------------------------------------
 
 class sousnoeud
@@ -25,21 +21,6 @@ class sousnoeud
 //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-    sousnoeud & operator = ( const sousnoeud & unsousnoeud );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     sousnoeud ( const sousnoeud & unsousnoeud );
@@ -48,7 +29,7 @@ public:
     // Contrat :
     //
     
-    sousnoeud(log unLog);
+    sousnoeud(string unLog);
     // Mode d'emploi :
     //
     // Contrat :
@@ -75,8 +56,8 @@ protected:
 
 private:
 //----------------------------------------------------- Méthodes privées
-    vector<log> vecteur_logs; // pour un noeud donné 
-    int nbhits;
+    vector<string> vecteur_logs; // pour un un réfreur et une cible
+    int nbhits; // nb de hits depuis un réfreur spécifique vers une cible
 //----------------------------------------------------- Attributs privées
 
 };

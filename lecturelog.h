@@ -1,69 +1,55 @@
 //---------- Interface de la classe <lecturelog> (fichier lecturelog.h) ----------------
-#if ! defined ( lecturelog_H )
+#if !defined(lecturelog_H)
 #define lecturelog_H
-
+using namespace std;
 //--------------------------------------------------- Interfaces utilisées
+#include <string>
+class graph;
 
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
-//------------------------------------------------------------------------
 // Rôle de la classe <lecturelog>
-//
-//
+// Le rôle de cette classe est de réaliser la lecture du fichier log
+// elle permet de filtrer les logs selon les différents critères de sélection
 //------------------------------------------------------------------------
-
 class lecturelog
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    //----------------------------------------------------- Méthodes publiques
 
+    void lectureFichier(graph &unGraphe, bool optionE, int heure);
+    // permet d'exporter les données depuis le fichier de logs fourni
 
-//------------------------------------------------- Surcharge d'opérateurs
-    lecturelog & operator = ( const lecturelog & unlecturelog );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    lecturelog &operator=(const lecturelog &unlecturelog);
 
+    //-------------------------------------------- Constructeurs - destructeur
+    lecturelog(const lecturelog &unlecturelog);
 
-//-------------------------------------------- Constructeurs - destructeur
-    lecturelog ( const lecturelog & unlecturelog );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
+    lecturelog(string);
 
-    lecturelog ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~lecturelog ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-//------------------------------------------------------------------ PRIVE
+    virtual ~lecturelog();
+    //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+    //----------------------------------------------------- Méthodes protégées
 
-//----------------------------------------------------- Attributs protégés
+    //----------------------------------------------------- Attributs protégés
+private:
+    //----------------------------------------------------- Méthodes privées
 
+    // ces méthodes permettent de réaliser des insertions dans le dictionnaire selon les filtres appliqués
+    void insertionSansOptions(string ligneLog, graph &unGraphe);
+
+    void insertionsOptionE(string ligneLog, graph &unGraphe);
+
+    void insertionsOptionHeure(string ligneLog, graph &unGraphe, int heure);
+
+    void insertionsOptionHeureEtE(string ligneLog, graph &unGraphe, int heure);
+
+    //----------------------------------------------------- Attributs privés
+    string nomFichier;
 };
 
 //-------------------------------- Autres définitions dépendantes de <lecturelog>
 
 #endif // lecturelog_H
-

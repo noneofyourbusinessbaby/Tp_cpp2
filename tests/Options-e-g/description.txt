@@ -1,0 +1,9 @@
+### Test  ###
+
+But : Valider la commande "../build/output ./analog -e -g unFichier.dot unFichier.log " donc avec les focntions -e et -g
+
+Fichiers utilisés :
+- un fichier de type .log
+
+Fichiers attendus : 
+- un fichier de type .dot

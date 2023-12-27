@@ -1,0 +1,9 @@
+### Test  ###
+
+But : Valider la commande "./prog.exe depart.log -g 6f.dot" de création de graphe sans options
+
+Fichiers utilisés :
+- un fichier de type .log 
+
+Fichiers attendus : 
+- un fichier de type .dot

@@ -5,46 +5,35 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
 #include <iostream>
-#include <noeud.h>
+#include <vector>
+#include "lecturelog.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
-
+#define NB_SOMMETS 10
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
 // Rôle de la classe <graph>
-//
-//
+// Graphe est la classe qui va contenir et gérer l'ensemble des logs dans
+// dictionnaire 
 //------------------------------------------------------------------------
-
+class noeud;
 class graph
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void ajouteNoeudAuDictionnaire(string refreur,string cible,string log);
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
-    vector<vector<string,int>> faitClassement();
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    void afficheHitsMax();
+    // Permet d'afficher le top 10 des cibles % au nb de hits 
 
+    void ajouteLogAuDictionnaire(string refreur, string cible, string log);
+    // Permet d'ajouter un Log au map qui est l'attribut de la classe
 
-//------------------------------------------------- Surcharge d'opérateurs
-    graph & operator = ( const graph & ungraph );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
+    //------------------------------------------------- Surcharge d'opérateurs
+    ostream& operator << (ostream & out) const;
+    // surcharge de l'opérateur << pour l'affichage du graphe
 
 //-------------------------------------------- Constructeurs - destructeur
     graph ( const graph & ungraph );
@@ -73,9 +62,9 @@ protected:
 
 private:
 //----------------------------------------------------- Méthodes privées
-    map<string,noeud> dictionnaire_noeuds; // un graphe a comme clé un objet de type string qui est un réfreur le noeud est un dictionnaire soit un ensemble des liens qu'n peut atteindre depuis de refreur 
 //----------------------------------------------------- Attributs privées
-
+    map<string,noeud> dictionnaire_noeuds;
+    // un graphe a comme clé un objet de type string qui est un réfreur le noeud est lui même un dictionnaire soit un ensemble de cibles qu'on peut atteindre depuis de refreur
 };
 
 //-------------------------------- Autres définitions dépendantes de <graph>

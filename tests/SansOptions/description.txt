@@ -1,0 +1,6 @@
+### Test 1 ###
+
+But : Valider la commande "cd .. && make && ./prog.exe depart.log " qui n'a pas d'options
+
+Fichiers utilisés :
+- un fichier de type log : depart.log

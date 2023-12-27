@@ -1,7 +1,45 @@
-#include <sousnoeud.h>
+//---------- Réalisation de la classe <sousnoeud> (fichier sousnoeud.cpp) ------------
 
-sousnoeud::sousnoeud(log unLog)
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
+#include <iostream>
+
+//------------------------------------------------------ Include personnel
+#include "sousnoeud.h"
+
+//-------------------------------------------- Constructeurs - destructeur
+sousnoeud::sousnoeud ( const sousnoeud & unsousnoeud )
+// Algorithme :
+//
 {
-    nbhits=1;
-    vecteur_logs.push_back(unLog);
-}
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <sousnoeud>" << endl;
+#endif
+} //----- Fin de sousnoeud (constructeur de copie)
+
+
+sousnoeud::sousnoeud ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <sousnoeud>" << endl;
+#endif
+} //----- Fin de sousnoeud
+
+
+sousnoeud::~sousnoeud ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <sousnoeud>" << endl;
+#endif
+} //----- Fin de ~sousnoeud
+
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées

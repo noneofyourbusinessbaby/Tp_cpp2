@@ -1,0 +1,1 @@
+../build/output ./analog -t 12 -g unFichier.dot unFichier.log
