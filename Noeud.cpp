@@ -1,5 +1,5 @@
 
-//---------- Réalisation de la classe <noeud> (fichier noeud.cpp) ------------
+//---------- Réalisation de la classe <Noeud> (fichier Noeud.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -8,39 +8,39 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "noeud.h"
-#include "sousnoeud.h"
+#include "Noeud.h"
+#include "SousNoeud.h"
 
 //-------------------------------------------- Constructeurs - destructeur
-noeud::noeud(const noeud &unnoeud)
+Noeud::Noeud(const Noeud &unnoeud)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <noeud>" << endl;
+    cout << "Appel au constructeur de copie de <Noeud>" << endl;
 #endif
-} //----- Fin de noeud (constructeur de copie)
+} //----- Fin de Noeud (constructeur de copie)
 
-noeud::noeud()
+Noeud::Noeud()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <noeud>" << endl;
+    cout << "Appel au constructeur de <Noeud>" << endl;
 #endif
     hits = 0; // on initialise le nb de hits à 0
     nbinstances++;
     numinstance = nbinstances;
-} //----- Fin de noeud
+} //----- Fin de Noeud
 
-noeud::~noeud()
+Noeud::~Noeud()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <noeud>" << endl;
+    cout << "Appel au destructeur de <Noeud>" << endl;
 #endif
-} //----- Fin de ~noeud
+} //----- Fin de ~Noeud
 
 //------------------------------------------------------------------ PRIVE
 

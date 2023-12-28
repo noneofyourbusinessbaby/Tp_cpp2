@@ -1,4 +1,4 @@
-//---------- Interface de la classe <noeud> (fichier noeud.h) ----------------
+//---------- Interface de la classe <Noeud> (fichier Noeud.h) ----------------
 #if !defined(noeud_H)
 #define noeud_H
 
@@ -6,15 +6,15 @@
 #include <map>
 #include <iostream>
 #include "Graph.h"
-#include "sousnoeud.h"
+#include "SousNoeud.h"
 
 //------------------------------------------------------------------------
-// Rôle de la classe <noeud>
+// Rôle de la classe <Noeud>
 // Cette classe permet de stocker les cibles atteignables depuis un réfreur 
 // donné qui est une clé du map de la classe graph
 //------------------------------------------------------------------------
 
-class noeud
+class Noeud
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -23,19 +23,19 @@ public:
     friend class Graph; 
     
     //-------------------------------------------- Constructeurs - destructeur
-    noeud(const noeud &unnoeud);
+    Noeud(const Noeud &unnoeud);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    noeud();
+    Noeud();
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    virtual ~noeud();
+    virtual ~Noeud();
     // Mode d'emploi :
     //
     // Contrat :
@@ -50,13 +50,13 @@ protected:
 
 private:
     //----------------------------------------------------- Méthodes privées
-    map<string, sousnoeud> dictionnaire_sous_noeuds; // la clé ici est la cible depuis réfreur sous noaud contient les logs communs au réfreur et à la cible + nb de hits communs
-    int hits; // correspond au nb de hits total de la clé (oui elle est enregistrée dans noeud)
-    static int nbinstances; // permet de numéroter les insatnces de noeud pour la génération du graphe
+    map<string, SousNoeud> dictionnaire_sous_noeuds; // la clé ici est la cible depuis réfreur sous noaud contient les logs communs au réfreur et à la cible + nb de hits communs
+    int hits; // correspond au nb de hits total de la clé (oui elle est enregistrée dans Noeud)
+    static int nbinstances; // permet de numéroter les insatnces de Noeud pour la génération du graphe
     int numinstance;
     //----------------------------------------------------- Attributs privées
 };
 
-//-------------------------------- Autres définitions dépendantes de <noeud>
+//-------------------------------- Autres définitions dépendantes de <Noeud>
 
 #endif // noeud_H

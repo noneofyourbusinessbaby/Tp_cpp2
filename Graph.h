@@ -6,7 +6,7 @@
 #include <map>
 #include <iostream>
 #include <vector>
-#include "lecturelog.h"
+#include "LectureLog.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 #define NB_SOMMETS 10
@@ -17,7 +17,7 @@ using namespace std;
 // Graphe est la classe qui va contenir et gérer l'ensemble des logs dans
 // dictionnaire 
 //------------------------------------------------------------------------
-class noeud;
+class Noeud;
 
 class Graph
 {
@@ -38,7 +38,7 @@ public:
     // surcharge de l'opérateur << pour l'affichage du Graphe
 
 //-------------------------------------------- Constructeurs - destructeur
- Graph ( const Graph & grap);
+ Graph ( const Graph & graph);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
@@ -65,8 +65,8 @@ protected:
 private:
 //----------------------------------------------------- Méthodes privées
 //----------------------------------------------------- Attributs privées
-    map<string,noeud> dictionnaire_noeuds;
-    // un Graphe a comme clé un objet de type string qui est un réfreur le noeud est lui même un dictionnaire soit un ensemble de cibles qu'on peut atteindre depuis de refreur
+    map<string,Noeud> dictionnaire_noeuds;
+    // un Graphe a comme clé un objet de type string qui est un réfreur le Noeud est lui même un dictionnaire soit un ensemble de cibles qu'on peut atteindre depuis de refreur
 };
 
 //-------------------------------- Autres définitions dépendantes de  Graph>

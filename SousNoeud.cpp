@@ -1,4 +1,4 @@
-//---------- Réalisation de la classe <sousnoeud> (fichier sousnoeud.cpp) ------------
+//---------- Réalisation de la classe <SousNoeud> (fichier SousNoeud.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -7,37 +7,37 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "sousnoeud.h"
+#include "SousNoeud.h"
 
 //-------------------------------------------- Constructeurs - destructeur
-sousnoeud::sousnoeud ( const sousnoeud & unsousnoeud )
+SousNoeud::SousNoeud ( const SousNoeud & unsousnoeud )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <sousnoeud>" << endl;
+    cout << "Appel au constructeur de copie de <SousNoeud>" << endl;
 #endif
-} //----- Fin de sousnoeud (constructeur de copie)
+} //----- Fin de SousNoeud (constructeur de copie)
 
 
-sousnoeud::sousnoeud ( )
+SousNoeud::SousNoeud ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <sousnoeud>" << endl;
+    cout << "Appel au constructeur de <SousNoeud>" << endl;
 #endif
-} //----- Fin de sousnoeud
+} //----- Fin de SousNoeud
 
 
-sousnoeud::~sousnoeud ( )
+SousNoeud::~SousNoeud ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <sousnoeud>" << endl;
+    cout << "Appel au destructeur de <SousNoeud>" << endl;
 #endif
-} //----- Fin de ~sousnoeud
+} //----- Fin de ~SousNoeud
 
 
 //------------------------------------------------------------------ PRIVE

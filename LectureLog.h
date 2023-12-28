@@ -1,4 +1,4 @@
-//---------- Interface de la classe <lecturelog> (fichier lecturelog.h) ----------------
+//---------- Interface de la classe <LectureLog> (fichier LectureLog.h) ----------------
 #if !defined(lecturelog_H)
 #define lecturelog_H
 using namespace std;
@@ -6,11 +6,11 @@ using namespace std;
 #include <string>
 class Graph;
 
-// Rôle de la classe <lecturelog>
+// Rôle de la classe <LectureLog>
 // Le rôle de cette classe est de réaliser la lecture du fichier log
 // elle permet de filtrer les logs selon les différents critères de sélection
 //------------------------------------------------------------------------
-class lecturelog
+class LectureLog
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -20,15 +20,15 @@ public:
     void lectureFichier(Graph &unGraphe, bool optionE, int heure);
     // permet d'exporter les données depuis le fichier de logs fourni
 
-    lecturelog &operator=(const lecturelog &unlecturelog);
+    LectureLog &operator=(const LectureLog &unlecturelog);
 
     //-------------------------------------------- Constructeurs - destructeur
-    lecturelog(const lecturelog &unlecturelog);
+    LectureLog(const LectureLog &unlecturelog);
 
     // TODO: ???????? const string& nomFichier
-    lecturelog(string);
+    LectureLog(string);
 
-    virtual ~lecturelog();
+    virtual ~LectureLog();
     //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -55,6 +55,6 @@ private:
     string nomFichier;
 };
 
-//-------------------------------- Autres définitions dépendantes de <lecturelog>
+//-------------------------------- Autres définitions dépendantes de <LectureLog>
 
 #endif // lecturelog_H

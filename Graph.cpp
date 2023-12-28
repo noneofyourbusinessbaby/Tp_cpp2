@@ -4,8 +4,8 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Graph.h"
-#include "noeud.h"
-#include "sousnoeud.h"
+#include "Noeud.h"
+#include "SousNoeud.h"
 
 //------------------------------------------------------------- Constantes
 #define NB_SOMMETS 10
@@ -23,23 +23,23 @@ void Graph::ajouteLogAuDictionnaire(string refreur, string cible, string unLog)
         // TODO: la if faut absolument que tu garde dictionnaire_noeuds[refreur] dans une variable sinon il va parcourir ton dic et le chercher à chaque fois
         // const auto& noeud_refreur = dictionnaire_noeuds[refreur];
         
-        if (dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds.count(cible) > 0) // si la cible est déjà dedans on rajoute le log au sous noeud
+        if (dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds.count(cible) > 0) // si la cible est déjà dedans on rajoute le log au sous Noeud
         {
             dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible].nbhits++;
             dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible].vecteur_logs.push_back(unLog);
         }
         else // sinon on la crée
         {
-            dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible] = sousnoeud();
+            dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible] = SousNoeud();
             dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible].nbhits = 1;
             dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible].vecteur_logs.push_back(unLog);
         }
     }
-    else // le tuple du réfreur n'existe pas il faut créer un noeud en plus de tout ça
+    else // le tuple du réfreur n'existe pas il faut créer un Noeud en plus de tout ça
     {
 
-        dictionnaire_noeuds[refreur] = noeud();
-        dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible] = sousnoeud();
+        dictionnaire_noeuds[refreur] = Noeud();
+        dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible] = SousNoeud();
         dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible].nbhits = 1;
         dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible].vecteur_logs.push_back(unLog);
     }
@@ -51,7 +51,7 @@ void Graph::ajouteLogAuDictionnaire(string refreur, string cible, string unLog)
     }
     else
     {
-        dictionnaire_noeuds[cible] = noeud();
+        dictionnaire_noeuds[cible] = Noeud();
         dictionnaire_noeuds[cible].hits=1;
     }
 
@@ -64,7 +64,7 @@ void Graph::afficheHitsMax()
 
     int compteur = 0;
 
-    for (map<string, noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur)
+    for (map<string, Noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur)
     {
         multimap<int, string>::iterator position = dictionnaire.lower_bound(iterateur->second.hits);
         dictionnaire.emplace_hint(position, iterateur->second.hits, iterateur->first);
@@ -94,17 +94,17 @@ ostream &Graph::operator<<(std::ostream &out) const
     // étape 1 : on imprime les noeuds
     out << "digraph {" << endl;
 
-    for (map<string, noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur) // on incrémente à gauche pour pas créer de copies
+    for (map<string, Noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur) // on incrémente à gauche pour pas créer de copies
     {
         out << "node" << iterateur->second.numinstance << " [label=\"" << iterateur->first << "\"];" << endl;
     }
 
     // étape 2 : on imprime les arrêtes
-    for (map<string, noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur) // on incrémente à gauche pour pas créer de copies
+    for (map<string, Noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur) // on incrémente à gauche pour pas créer de copies
     {
-        for (map<string, sousnoeud>::const_iterator iterateur2 = iterateur->second.dictionnaire_sous_noeuds.begin(); iterateur2 != iterateur->second.dictionnaire_sous_noeuds.end(); ++iterateur2) // on incrémente à gauche pour pas créer de copies
+        for (map<string, SousNoeud>::const_iterator iterateur2 = iterateur->second.dictionnaire_sous_noeuds.begin(); iterateur2 != iterateur->second.dictionnaire_sous_noeuds.end(); ++iterateur2) // on incrémente à gauche pour pas créer de copies
         {
-            map<string, noeud>::const_iterator iterateur3 = dictionnaire_noeuds.find(iterateur2->first);
+            map<string, Noeud>::const_iterator iterateur3 = dictionnaire_noeuds.find(iterateur2->first);
             out << "node" << iterateur->second.numinstance << " -> node" << iterateur3->second.numinstance << " [label=\"" << iterateur2->second.nbhits << "\"];" << endl;
         }
     }

@@ -1,8 +1,8 @@
 #include "main.h"
 
 #include "Graph.h"
-#include "noeud.h"
-#include "lecturelog.h"
+#include "Noeud.h"
+#include "LectureLog.h"
 
 #include <cstring>
 #include <fstream>
@@ -22,8 +22,8 @@ enum tests
     Test3
 };
 
-// TODO: Tu peux pas faire ca ! Tu est pas sensé modifier la classe noeud depuis le main
-int noeud::nbinstances = 0;
+// TODO: Tu peux pas faire ca ! Tu est pas sensé modifier la classe Noeud depuis le main
+int Noeud::nbinstances = 0;
 
 // void genereFichierDot(const string& nomGraph, const Graph &leGraphe)
 void genereFichierDot(string nomGraph, const Graph &leGraphe)
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
         // on génère le Graphe à partir des arguments
         Graph leGraphe;
 
-        lecturelog classeLecture = lecturelog(nomFichier);
+        LectureLog classeLecture = LectureLog(nomFichier);
 
         classeLecture.lectureFichier(leGraphe, optionE, heure);
 

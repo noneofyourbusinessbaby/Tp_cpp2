@@ -1,4 +1,4 @@
-//---------- Interface de la classe <sousnoeud> (fichier sousnoeud.h) ----------------
+//---------- Interface de la classe <SousNoeud> (fichier SousNoeud.h) ----------------
 #if ! defined ( sousnoeud_H )
 #define sousnoeud_H
 
@@ -11,12 +11,12 @@
 using namespace std;
 
 //------------------------------------------------------------------------
-// Rôle de la classe <sousnoeud>
-// Sous noeud permet de stocker les infos communes à une cible et un réfreur
+// Rôle de la classe <SousNoeud>
+// Sous Noeud permet de stocker les infos communes à une cible et un réfreur
 // donc le nb de hits commun au deux et les logs
 //------------------------------------------------------------------------
 
-class sousnoeud
+class SousNoeud
 {
 //----------------------------------------------------------------- AMITIE
     friend class Graph;
@@ -26,26 +26,26 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     
-    sousnoeud ( const sousnoeud & unsousnoeud );
+    SousNoeud ( const SousNoeud & unsousnoeud );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
     
     // TODO: const string & unLog
-    sousnoeud(string unLog);
+    SousNoeud(string unLog);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    sousnoeud ( );
+    SousNoeud ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~sousnoeud ( );
+    virtual ~SousNoeud ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -66,7 +66,7 @@ private:
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <sousnoeud>
+//-------------------------------- Autres définitions dépendantes de <SousNoeud>
 
 #endif // sousnoeud_H
 
