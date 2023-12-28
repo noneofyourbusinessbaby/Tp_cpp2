@@ -2,7 +2,7 @@ CPPFLAGS = -g -Wall -ansi -pedantic -std=c++11
 # version initiale sans variable
 # règle explicite pour la reliure
 EXE = prog
-OBJ =  main.o lecturelog.o noeud.o sousnoeud.o graph.o
+OBJ =  main.o lecturelog.o noeud.o sousnoeud.o Graph.o
 GCC = g++
 
 $(EXE) : $(OBJ) # dépendance
@@ -16,14 +16,22 @@ lecturelog.o : lecturelog.h lecturelog.cpp # dépendance
 # règle explicite pour la compilation de noeud
 noeud.o : noeud.h noeud.cpp # dépendance
 	$(GCC) -c noeud.cpp $(CPPFLAGS)
-# règle explicite pour la compilation de graph
-graph.o : graph.h graph.cpp # dépendance
-	$(GCC) -c graph.cpp $(CPPFLAGS)
+# règle explicite pour la compilation de Graph
+Graph.o : Graph.h Graph.cpp # dépendance
+	$(GCC) -c Graph.cpp $(CPPFLAGS)
 # règle explicite pour la compilation de sousnoeud
 sousnoeud.o : sousnoeud.h sousnoeud.cpp # dépendance
 	$(GCC) -c sousnoeud.cpp $(CPPFLAGS)
+
+val:
+	valgrind --leak-check=yes $(EXE)
+
 clean:
-	rm -f $(EXE) $(OBJ)
+	rm *.o
+	rm $(EXE)
+
 test:
 	cd tests; ./mktest.sh
 
+val:
+	valgrind --leak-check=yes ./$(EXE) ./depart.log

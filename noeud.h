@@ -5,7 +5,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
 #include <iostream>
-#include "graph.h"
+#include "Graph.h"
 #include "sousnoeud.h"
 
 //------------------------------------------------------------------------
@@ -20,7 +20,7 @@ class noeud
 
 public:
     //----------------------------------------------------- Amitié
-    friend class graph; 
+    friend class Graph; 
     
     //-------------------------------------------- Constructeurs - destructeur
     noeud(const noeud &unnoeud);
@@ -31,12 +31,6 @@ public:
 
     noeud();
     // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    void ajouteSousNoeud(string cible, sousnoeud unSousNoeud);
-    // Mode d'emploi :
     //
     // Contrat :
     //

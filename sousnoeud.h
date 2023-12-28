@@ -5,7 +5,9 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <vector>
 #include <iostream>
-#include "graph.h"
+
+#include "Graph.h"
+
 using namespace std;
 
 //------------------------------------------------------------------------
@@ -17,18 +19,20 @@ using namespace std;
 class sousnoeud
 {
 //----------------------------------------------------------------- AMITIE
-    friend class graph;
+    friend class Graph;
 //----------------------------------------------------------------- PUBLIC
 
 public:
 
 //-------------------------------------------- Constructeurs - destructeur
+    
     sousnoeud ( const sousnoeud & unsousnoeud );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
     
+    // TODO: const string & unLog
     sousnoeud(string unLog);
     // Mode d'emploi :
     //

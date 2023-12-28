@@ -1,0 +1,1 @@
+../../prog -t 0 depart.log -g graph.dot

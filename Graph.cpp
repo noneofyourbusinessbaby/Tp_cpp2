@@ -3,23 +3,26 @@ using namespace std;
 #include <string>
 
 //------------------------------------------------------ Include personnel
-#include "graph.h"
+#include "Graph.h"
 #include "noeud.h"
 #include "sousnoeud.h"
 
 //------------------------------------------------------------- Constantes
-
+#define NB_SOMMETS 10
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type graph::Méthode ( liste des paramètres )
+// type Graph::Méthode ( liste des paramètres )
 
-void graph::ajouteLogAuDictionnaire(string refreur, string cible, string unLog)
+void Graph::ajouteLogAuDictionnaire(string refreur, string cible, string unLog)
 // Algorithme :
 //
 {
     if (dictionnaire_noeuds.count(refreur) > 0) // si on a déjà le tuple du réfreur
     {
+        // TODO: la if faut absolument que tu garde dictionnaire_noeuds[refreur] dans une variable sinon il va parcourir ton dic et le chercher à chaque fois
+        // const auto& noeud_refreur = dictionnaire_noeuds[refreur];
+        
         if (dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds.count(cible) > 0) // si la cible est déjà dedans on rajoute le log au sous noeud
         {
             dictionnaire_noeuds[refreur].dictionnaire_sous_noeuds[cible].nbhits++;
@@ -54,11 +57,13 @@ void graph::ajouteLogAuDictionnaire(string refreur, string cible, string unLog)
 
 } //----- Fin de Méthode
 
-void graph::afficheHitsMax()
+void Graph::afficheHitsMax()
 {
     // on génère un multimap où hits sont en clé et la cible en string on fait en sorte d'insérer en triant par ordre croissant
     multimap<int, string> dictionnaire;
+
     int compteur = 0;
+
     for (map<string, noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur)
     {
         multimap<int, string>::iterator position = dictionnaire.lower_bound(iterateur->second.hits);
@@ -67,7 +72,7 @@ void graph::afficheHitsMax()
 
     // on parcourt dans le sens inverse
     int prevVal=-1;
-    for (map<int, string>::const_reverse_iterator iterateur = dictionnaire.rbegin(); iterateur != dictionnaire.rend() && compteur < NB_SOMMETS; ++iterateur) // on incrémente à gauche pour pas créer de copies
+    for (map<int, string>::const_reverse_iterator iterateur = dictionnaire.rbegin(); iterateur != dictionnaire.rend(); ++iterateur) // on incrémente à gauche pour pas créer de copies
     {
         cout << iterateur->second << " "
              << "(" << iterateur->first << " hits)" << endl;
@@ -76,61 +81,64 @@ void graph::afficheHitsMax()
         {
             compteur++;
         }
+        if (compteur==10){break;}
         prevVal=iterateur->first;
     }
 } //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-ostream &graph::operator<<(std::ostream &out) const
+ostream &Graph::operator<<(std::ostream &out) const
 {
+    // TODO: UTILISER OUT PAS COUT PARTOUT
     // étape 1 : on imprime les noeuds
-    cout << "digraph {" << endl;
+    out << "digraph {" << endl;
+
     for (map<string, noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur) // on incrémente à gauche pour pas créer de copies
     {
-        cout << "node" << iterateur->second.numinstance << " [label=\"" << iterateur->first << "\"];" << endl;
+        out << "node" << iterateur->second.numinstance << " [label=\"" << iterateur->first << "\"];" << endl;
     }
 
-    // étape 2 : on imprime les arêtes
+    // étape 2 : on imprime les arrêtes
     for (map<string, noeud>::const_iterator iterateur = dictionnaire_noeuds.begin(); iterateur != dictionnaire_noeuds.end(); ++iterateur) // on incrémente à gauche pour pas créer de copies
     {
         for (map<string, sousnoeud>::const_iterator iterateur2 = iterateur->second.dictionnaire_sous_noeuds.begin(); iterateur2 != iterateur->second.dictionnaire_sous_noeuds.end(); ++iterateur2) // on incrémente à gauche pour pas créer de copies
         {
             map<string, noeud>::const_iterator iterateur3 = dictionnaire_noeuds.find(iterateur2->first);
-            cout << "node" << iterateur->second.numinstance << " -> node" << iterateur3->second.numinstance << " [label=\"" << iterateur2->second.nbhits << "\"];" << endl;
+            out << "node" << iterateur->second.numinstance << " -> node" << iterateur3->second.numinstance << " [label=\"" << iterateur2->second.nbhits << "\"];" << endl;
         }
     }
-    cout << "}";
+    out << "}";
     return out;
 } //----- Fin de operator <<
 
 //-------------------------------------------- Constructeurs - destructeur
-graph::graph(const graph &ungraph)
+Graph::Graph(const Graph &unGraph)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <graph>" << endl;
+    cout << "Appel au constructeur de copie de <Graph>" << endl;
 #endif
-} //----- Fin de graph (constructeur de copie)
+} //----- Fin de Graph (constructeur de copie)
 
-graph::graph()
+Graph::Graph()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <graph>" << endl;
+    cout << "Appel au constructeur de <Graph>" << endl;
 #endif
-} //----- Fin de graph
+} //----- Fin de Graph
 
-graph::~graph()
+Graph::~Graph()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <graph>" << endl;
+    cout << "Appel au destructeur de <Graph>" << endl;
 #endif
-} //----- Fin de ~graph
+} //----- Fin de ~Graph
 
 //------------------------------------------------------------------ PRIVE
 

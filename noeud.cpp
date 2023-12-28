@@ -33,10 +33,6 @@ noeud::noeud()
     numinstance = nbinstances;
 } //----- Fin de noeud
 
-void noeud::ajouteSousNoeud(string cible, sousnoeud unSousNoeud)
-{
-}
-
 noeud::~noeud()
 // Algorithme :
 //

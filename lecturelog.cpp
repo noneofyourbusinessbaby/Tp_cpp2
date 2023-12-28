@@ -9,13 +9,16 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "lecturelog.h"
-#include "graph.h"
+#include "Graph.h"
 #include <regex>
 
 //------------------------------------------------------------- Constantes
+
+// TODO: static const
 string apacheLogRegex1= "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})( - - \\[\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}:\\d{2}:\\d{2}:)(\\d{2})( )(\\+|\\-)(\\d{4})(]\\ )((\")(GET|POST|HEAD|OPTIONS)( ))(\\/.+)(\\.)(.+)( )(HTTP\\/1\\.(1|0))(\")( )(\\d{3})( )(\\d+)( )(\")";
 string serveur= "(http:\\/\\/intranet\\-if.insa-lyon.fr)";
 string apacheLogRegex2="(.+)(\")( )((\")(.+)(\"))";
+
 const string apacheLogRegex=apacheLogRegex1+serveur+apacheLogRegex2;
 const string extention="html";
 const int posCibleSansExt=12;
@@ -26,7 +29,8 @@ const int posHeure=3;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void lecturelog::lectureFichier(graph &unGraphe, bool optionE = false, int heure = -1)
+// TODO: optionE et heure en paramètre ne doivent pas avoir la valeur par default ici mais QUE dans le .h !!!
+void lecturelog::lectureFichier(Graph &unGraphe, bool optionE = false, int heure = -1)
 {
     string line;
     ifstream file;
@@ -57,7 +61,7 @@ void lecturelog::lectureFichier(graph &unGraphe, bool optionE = false, int heure
 }
 //----- Fin de Méthode
 
-void lecturelog::insertionSansOptions(string ligneLog, graph &unGraphe)
+void lecturelog::insertionSansOptions(string ligneLog, Graph &unGraphe)
 {
 
     std::regex apacheLogRgex(apacheLogRegex);
@@ -72,7 +76,7 @@ void lecturelog::insertionSansOptions(string ligneLog, graph &unGraphe)
 }
 //----- Fin de Méthode
 
-void lecturelog::insertionsOptionE(string ligneLog, graph &unGraphe)
+void lecturelog::insertionsOptionE(string ligneLog, Graph &unGraphe)
 {
 
     std::regex apacheLogRgex(apacheLogRegex);
@@ -90,16 +94,16 @@ void lecturelog::insertionsOptionE(string ligneLog, graph &unGraphe)
 }
 //----- Fin de Méthode
 
-void lecturelog::insertionsOptionHeure(string ligneLog, graph &unGraphe, int heure)
+void lecturelog::insertionsOptionHeure(string ligneLog, Graph &unGraphe, int heure)
 {
-
     std::regex apacheLogRgex(apacheLogRegex);
     std::smatch ensembleElements;
     if (regex_match(ligneLog, ensembleElements, apacheLogRgex))
     {
         int heureLog =std::stoi(ensembleElements[posHeure]);
-        if (heureLog == heure || heureLog == heure + 1)
-        {
+        
+        if (heureLog == heure )
+        {  
             std::string cible = ensembleElements[posCibleSansExt];
             cible += ensembleElements[posPointCible];
             cible += ensembleElements[posExtCible];
@@ -109,7 +113,7 @@ void lecturelog::insertionsOptionHeure(string ligneLog, graph &unGraphe, int heu
 }
 //----- Fin de Méthode
 
-void lecturelog::insertionsOptionHeureEtE(string ligneLog, graph &unGraphe, int heure)
+void lecturelog::insertionsOptionHeureEtE(string ligneLog, Graph &unGraphe, int heure)
 {
 
     std::regex apacheLogRgex(apacheLogRegex);
@@ -117,7 +121,7 @@ void lecturelog::insertionsOptionHeureEtE(string ligneLog, graph &unGraphe, int 
     if (regex_match(ligneLog, ensembleElements, apacheLogRgex))
     {
         int heureLog = std::stoi(ensembleElements[posHeure]);
-        if (ensembleElements[posExtCible] == extention && (heureLog == heure || heureLog == heure + 1))
+        if (ensembleElements[posExtCible] == extention && (heureLog == heure))
         {
             std::string cible = ensembleElements[posCibleSansExt];
             cible += ensembleElements[posPointCible];

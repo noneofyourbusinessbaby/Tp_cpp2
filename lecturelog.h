@@ -4,7 +4,7 @@
 using namespace std;
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
-class graph;
+class Graph;
 
 // Rôle de la classe <lecturelog>
 // Le rôle de cette classe est de réaliser la lecture du fichier log
@@ -17,7 +17,7 @@ class lecturelog
 public:
     //----------------------------------------------------- Méthodes publiques
 
-    void lectureFichier(graph &unGraphe, bool optionE, int heure);
+    void lectureFichier(Graph &unGraphe, bool optionE, int heure);
     // permet d'exporter les données depuis le fichier de logs fourni
 
     lecturelog &operator=(const lecturelog &unlecturelog);
@@ -25,6 +25,7 @@ public:
     //-------------------------------------------- Constructeurs - destructeur
     lecturelog(const lecturelog &unlecturelog);
 
+    // TODO: ???????? const string& nomFichier
     lecturelog(string);
 
     virtual ~lecturelog();
@@ -38,13 +39,17 @@ private:
     //----------------------------------------------------- Méthodes privées
 
     // ces méthodes permettent de réaliser des insertions dans le dictionnaire selon les filtres appliqués
-    void insertionSansOptions(string ligneLog, graph &unGraphe);
+    // TODO: const string& ligneLog
+    void insertionSansOptions(string ligneLog, Graph &unGraphe);
 
-    void insertionsOptionE(string ligneLog, graph &unGraphe);
+    // TODO: const string& ligneLog
+    void insertionsOptionE(string ligneLog, Graph &unGraphe);
 
-    void insertionsOptionHeure(string ligneLog, graph &unGraphe, int heure);
+    // TODO: const string& ligneLog
+    void insertionsOptionHeure(string ligneLog, Graph &unGraphe, int heure);
 
-    void insertionsOptionHeureEtE(string ligneLog, graph &unGraphe, int heure);
+    // TODO: const string& ligneLog
+    void insertionsOptionHeureEtE(string ligneLog, Graph &unGraphe, int heure);
 
     //----------------------------------------------------- Attributs privés
     string nomFichier;
