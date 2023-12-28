@@ -1,1 +1,0 @@
-cd .. && make && ./prog.exe tests/Test0.log -g 6f.dot

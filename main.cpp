@@ -83,30 +83,10 @@ int main(int argc, char *argv[])
         // on dénère le fichier dot
         if (nomGraph != " ")
         {
-
-            if (optionE && heure < 0)
-            {
-                genereFichierDot(liste_repos[Test2], leGraphe);
-            }
-            else if (!optionE && heure >= 0)
-            {
-                genereFichierDot(liste_repos[Test1], leGraphe);
-            }
-            else if (!optionE && heure < 0)
-            {
-                genereFichierDot(liste_repos[Test0], leGraphe);
-            }
-            else
-            {
-                genereFichierDot(liste_repos[Test3], leGraphe);
-            }
-
-            genereFichierDot(nomGraph, leGraphe);
+            genereFichierDot(nomGraph, leGraphe); // on affiche les 10 premiers avec le plus de hits
             std::cout << "Dot-file " << nomGraph << " generated" << std::endl;
+            leGraphe.afficheHitsMax();
         }
-
-        // on affiche les 10 premiers avec le plus de hits
-        leGraphe.afficheHitsMax();
     }
 
     return 0;
