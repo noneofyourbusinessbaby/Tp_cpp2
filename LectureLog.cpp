@@ -1,4 +1,5 @@
 //---------- Réalisation de la classe <LectureLog> (fichier LectureLog.cpp) ------------
+#include "LectureLog.h"
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -8,29 +9,32 @@ using namespace std;
 #include <fstream>
 
 //------------------------------------------------------ Include personnel
-#include "LectureLog.h"
+
 #include "Graph.h"
+
 #include <regex>
 
 //------------------------------------------------------------- Constantes
 
-// TODO: static const
-string apacheLogRegex1= "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})( - - \\[\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}:\\d{2}:\\d{2}:)(\\d{2})( )(\\+|\\-)(\\d{4})(]\\ )((\")(GET|POST|HEAD|OPTIONS)( ))(\\/.+)(\\.)(.+)( )(HTTP\\/1\\.(1|0))(\")( )(\\d{3})( )(\\d+)( )(\")";
-string serveur= "(http:\\/\\/intranet\\-if.insa-lyon.fr)";
-string apacheLogRegex2="(.+)(\")( )((\")(.+)(\"))";
+#define apacheLogRegex1 "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})( - - \\[\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}:\\d{2}:\\d{2}:)(\\d{2})( )(\\+|\\-)(\\d{4})(]\\ )((\")(GET|POST|HEAD|OPTIONS)( ))(\\/.+)(\\.)(.+)( )(HTTP\\/1\\.(1|0))(\")( )(\\d{3})( )(\\d+)( )(\")"
+#define apacheLogRegex2 "(.+)(\")( )((\")(.+)(\"))"
 
-const string apacheLogRegex=apacheLogRegex1+serveur+apacheLogRegex2;
-const string extention="html";
-const int posCibleSansExt=12;
-const int posPointCible=13;
-const int posExtCible=14;
-const int posRefreur=26;
-const int posHeure=3;
+#define serveur "(http:\\/\\/intranet-if.insa-lyon.fr)"
+
+#define apacheLogRegex apacheLogRegex1 serveur apacheLogRegex2
+
+static const string extention="html";
+
+static const int posHeure=3;
+static const int posRefreur=26;
+static const int posExtCible=14;
+static const int posPointCible=13;
+static const int posCibleSansExt=12;
+
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// TODO: optionE et heure en paramètre ne doivent pas avoir la valeur par default ici mais QUE dans le .h !!!
-void LectureLog::lectureFichier(Graph &unGraphe, bool optionE = false, int heure = -1)
+void LectureLog::LectureFichier(Graph &unGraphe, bool optionE, int heure)
 {
     string line;
     ifstream file;
@@ -56,77 +60,96 @@ void LectureLog::lectureFichier(Graph &unGraphe, bool optionE = false, int heure
                 insertionsOptionHeureEtE(line, unGraphe, heure);
             }
         }
+
+        file.close();
     }
-    file.close();
+    else {
+        std::cerr << "Impossible d'ouvrir le fichier de log apache" << std::endl;
+    }
+
 }
 //----- Fin de Méthode
 
-void LectureLog::insertionSansOptions(string ligneLog, Graph &unGraphe)
+void LectureLog::insertionSansOptions(const string & ligneLog, Graph &unGraphe)
 {
-
     std::regex apacheLogRgex(apacheLogRegex);
-    std::smatch ensembleElements;
-    if (regex_match(ligneLog, ensembleElements, apacheLogRgex))
+    
+    std::smatch matches;
+
+    if (regex_match(ligneLog, matches, apacheLogRgex))
     {
-        std::string cible = ensembleElements[posCibleSansExt];
-        cible += ensembleElements[posPointCible];
-        cible += ensembleElements[posExtCible];
-        unGraphe.ajouteLogAuDictionnaire(ensembleElements[posRefreur], cible, ligneLog);
+        std::string cible = matches[posCibleSansExt];
+
+        cible += matches[posPointCible];
+        cible += matches[posExtCible];
+
+        unGraphe.AjouteLogAuDictionnaire(matches[posRefreur], cible, ligneLog);
     }
 }
 //----- Fin de Méthode
 
-void LectureLog::insertionsOptionE(string ligneLog, Graph &unGraphe)
+void LectureLog::insertionsOptionE(const string& ligneLog, Graph &unGraphe)
 {
-
     std::regex apacheLogRgex(apacheLogRegex);
-    std::smatch ensembleElements;
-    if (regex_match(ligneLog, ensembleElements, apacheLogRgex))
+
+    std::smatch matches;
+
+    if (regex_match(ligneLog, matches, apacheLogRgex))
     {
-        if (ensembleElements[posExtCible] == extention)
+        if (matches[posExtCible] == extention)
         {
-            std::string cible = ensembleElements[posCibleSansExt];
-            cible += ensembleElements[posPointCible];
-            cible += ensembleElements[posExtCible];
-            unGraphe.ajouteLogAuDictionnaire(ensembleElements[posRefreur], cible, ligneLog);
+            std::string cible = matches[posCibleSansExt];
+
+            cible += matches[posPointCible];
+            cible += matches[posExtCible];
+
+            unGraphe.AjouteLogAuDictionnaire(matches[posRefreur], cible, ligneLog);
         }
     }
 }
 //----- Fin de Méthode
 
-void LectureLog::insertionsOptionHeure(string ligneLog, Graph &unGraphe, int heure)
+void LectureLog::insertionsOptionHeure(const string& ligneLog, Graph &unGraphe, int heure)
 {
     std::regex apacheLogRgex(apacheLogRegex);
-    std::smatch ensembleElements;
-    if (regex_match(ligneLog, ensembleElements, apacheLogRgex))
+
+    std::smatch matches;
+
+    if (regex_match(ligneLog, matches, apacheLogRgex))
     {
-        int heureLog =std::stoi(ensembleElements[posHeure]);
+        int heureLog =std::stoi(matches[posHeure]);
         
-        if (heureLog == heure )
+        if (heureLog == heure)
         {  
-            std::string cible = ensembleElements[posCibleSansExt];
-            cible += ensembleElements[posPointCible];
-            cible += ensembleElements[posExtCible];
-            unGraphe.ajouteLogAuDictionnaire(ensembleElements[posRefreur], cible, ligneLog);
+            std::string cible = matches[posCibleSansExt];
+
+            cible += matches[posPointCible];
+            cible += matches[posExtCible];
+
+            unGraphe.AjouteLogAuDictionnaire(matches[posRefreur], cible, ligneLog);
         }
     }
 }
 //----- Fin de Méthode
 
-void LectureLog::insertionsOptionHeureEtE(string ligneLog, Graph &unGraphe, int heure)
+void LectureLog::insertionsOptionHeureEtE(const string& ligneLog, Graph &unGraphe, int heure)
 {
-
     std::regex apacheLogRgex(apacheLogRegex);
-    std::smatch ensembleElements;
-    if (regex_match(ligneLog, ensembleElements, apacheLogRgex))
+
+    std::smatch matches;
+
+    if (regex_match(ligneLog, matches, apacheLogRgex))
     {
-        int heureLog = std::stoi(ensembleElements[posHeure]);
-        if (ensembleElements[posExtCible] == extention && (heureLog == heure))
+        int heureLog = std::stoi(matches[posHeure]);
+        
+        if (matches[posExtCible] == extention && (heureLog == heure))
         {
-            std::string cible = ensembleElements[posCibleSansExt];
-            cible += ensembleElements[posPointCible];
-            cible += ensembleElements[posExtCible];
-            unGraphe.ajouteLogAuDictionnaire(ensembleElements[posRefreur], cible, ligneLog);
+            std::string cible = matches[posCibleSansExt];
+
+            cible += matches[posPointCible];
+            cible += matches[posExtCible];
+            
+            unGraphe.AjouteLogAuDictionnaire(matches[posRefreur], cible, ligneLog);
         }
     }
 }
@@ -142,14 +165,14 @@ LectureLog::LectureLog(const LectureLog &unlecturelog)
 #endif
 } //----- Fin de LectureLog (constructeur de copie)
 
-LectureLog::LectureLog(string unNomFichier)
+LectureLog::LectureLog(const string& unNomFichier)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <LectureLog>" << endl;
 #endif
-    nomFichier = unNomFichier;
+    nomFichier = std::move(unNomFichier);
 } //----- Fin de LectureLog
 
 LectureLog::~LectureLog()

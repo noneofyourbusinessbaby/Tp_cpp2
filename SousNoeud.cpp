@@ -1,13 +1,14 @@
 //---------- Réalisation de la classe <SousNoeud> (fichier SousNoeud.cpp) ------------
+#include "SousNoeud.h"
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
 using namespace std;
+
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "SousNoeud.h"
 
 //-------------------------------------------- Constructeurs - destructeur
 SousNoeud::SousNoeud ( const SousNoeud & unsousnoeud )
@@ -27,6 +28,8 @@ SousNoeud::SousNoeud ( )
 #ifdef MAP
     cout << "Appel au constructeur de <SousNoeud>" << endl;
 #endif
+
+    nbhits=0;
 } //----- Fin de SousNoeud
 
 

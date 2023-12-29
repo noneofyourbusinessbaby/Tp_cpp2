@@ -6,8 +6,6 @@
 #include <vector>
 #include <iostream>
 
-#include "Graph.h"
-
 using namespace std;
 
 //------------------------------------------------------------------------
@@ -19,22 +17,28 @@ using namespace std;
 class SousNoeud
 {
 //----------------------------------------------------------------- AMITIE
-    friend class Graph;
 //----------------------------------------------------------------- PUBLIC
 
 public:
 
 //-------------------------------------------- Constructeurs - destructeur
-    
-    SousNoeud ( const SousNoeud & unsousnoeud );
+    inline int GetNbhits() const {
+        return nbhits;
+    }
+
+    inline void Hit() {
+        ++nbhits;
+    }
+
+    inline void AjouteLog(const string & unLog)  {
+
+        vecteur_logs.push_back(std::move(unLog));
+
+        Hit();
+    }
+
+    SousNoeud (const SousNoeud & unsousnoeud );
     // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-    
-    // TODO: const string & unLog
-    SousNoeud(string unLog);
-    // Mode d'emploi :
     //
     // Contrat :
     //
@@ -60,8 +64,8 @@ protected:
 
 private:
 //----------------------------------------------------- Méthodes privées
-    vector<string> vecteur_logs; // pour un un réfreur et une cible
     int nbhits; // nb de hits depuis un réfreur spécifique vers une cible
+    vector<string> vecteur_logs; // pour un un réfreur et une cible
 //----------------------------------------------------- Attributs privées
 
 };

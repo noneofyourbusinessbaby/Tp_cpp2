@@ -1,14 +1,14 @@
-
 //---------- Réalisation de la classe <Noeud> (fichier Noeud.cpp) ------------
+#include "Noeud.h"
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
 using namespace std;
+
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Noeud.h"
 #include "SousNoeud.h"
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -28,9 +28,12 @@ Noeud::Noeud()
 #ifdef MAP
     cout << "Appel au constructeur de <Noeud>" << endl;
 #endif
+
     hits = 0; // on initialise le nb de hits à 0
-    nbinstances++;
-    numinstance = nbinstances;
+
+    static int nbinstances = 0;
+
+    numinstance = ++nbinstances;
 } //----- Fin de Noeud
 
 Noeud::~Noeud()

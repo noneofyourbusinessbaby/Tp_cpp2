@@ -3,13 +3,17 @@
 #define Graph_H
 
 //--------------------------------------------------- Interfaces utilisées
+
 #include <map>
+#include <string>
 #include <iostream>
-#include <vector>
+
 #include "LectureLog.h"
+
 using namespace std;
+
 //------------------------------------------------------------- Constantes
-#define NB_SOMMETS 10
+
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
@@ -26,15 +30,14 @@ class Graph
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    void afficheHitsMax();
+    void AfficheHitsMax();
     // Permet d'afficher le top 10 des cibles % au nb de hits 
 
-    // TODO: const string & refreur .... Utiliser les références pour éviter les copies puis faire des std::move(refereur) pour les déplacer
-    void ajouteLogAuDictionnaire(string refreur, string cible, string log);
+    void AjouteLogAuDictionnaire(const string& refreur, const string& cible, const string& log);
     // Permet d'ajouter un Log au map qui est l'attribut de la classe
 
     //------------------------------------------------- Surcharge d'opérateurs
-    ostream& operator << (ostream & out) const;
+    friend ostream& operator<<(ostream & out, const Graph& graph);
     // surcharge de l'opérateur << pour l'affichage du Graphe
 
 //-------------------------------------------- Constructeurs - destructeur

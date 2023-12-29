@@ -1,7 +1,7 @@
 CPPFLAGS = -g -Wall -ansi -pedantic -std=c++11
 # version initiale sans variable
 # règle explicite pour la reliure
-EXE = prog
+EXE = analog
 OBJ =  main.o LectureLog.o Noeud.o SousNoeud.o Graph.o
 GCC = g++
 
@@ -22,9 +22,6 @@ Graph.o : Graph.h Graph.cpp # dépendance
 # règle explicite pour la compilation de SousNoeud
 SousNoeud.o : SousNoeud.h SousNoeud.cpp # dépendance
 	$(GCC) -c SousNoeud.cpp $(CPPFLAGS)
-
-val:
-	valgrind --leak-check=yes $(EXE)
 
 clean:
 	rm *.o

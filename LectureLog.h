@@ -1,9 +1,12 @@
 //---------- Interface de la classe <LectureLog> (fichier LectureLog.h) ----------------
 #if !defined(lecturelog_H)
 #define lecturelog_H
-using namespace std;
 //--------------------------------------------------- Interfaces utilisées
+
 #include <string>
+
+using namespace std;
+
 class Graph;
 
 // Rôle de la classe <LectureLog>
@@ -17,16 +20,15 @@ class LectureLog
 public:
     //----------------------------------------------------- Méthodes publiques
 
-    void lectureFichier(Graph &unGraphe, bool optionE, int heure);
+    LectureLog(const string& fichier);
+
+    void LectureFichier(Graph &unGraphe, bool optionE, int heure);
     // permet d'exporter les données depuis le fichier de logs fourni
 
     LectureLog &operator=(const LectureLog &unlecturelog);
 
     //-------------------------------------------- Constructeurs - destructeur
     LectureLog(const LectureLog &unlecturelog);
-
-    // TODO: ???????? const string& nomFichier
-    LectureLog(string);
 
     virtual ~LectureLog();
     //------------------------------------------------------------------ PRIVE
@@ -39,17 +41,13 @@ private:
     //----------------------------------------------------- Méthodes privées
 
     // ces méthodes permettent de réaliser des insertions dans le dictionnaire selon les filtres appliqués
-    // TODO: const string& ligneLog
-    void insertionSansOptions(string ligneLog, Graph &unGraphe);
+    void insertionSansOptions(const string& ligneLog, Graph &unGraphe);
 
-    // TODO: const string& ligneLog
-    void insertionsOptionE(string ligneLog, Graph &unGraphe);
+    void insertionsOptionE(const string& ligneLog, Graph &unGraphe);
 
-    // TODO: const string& ligneLog
-    void insertionsOptionHeure(string ligneLog, Graph &unGraphe, int heure);
+    void insertionsOptionHeure(const string& ligneLog, Graph &unGraphe, int heure);
 
-    // TODO: const string& ligneLog
-    void insertionsOptionHeureEtE(string ligneLog, Graph &unGraphe, int heure);
+    void insertionsOptionHeureEtE(const string& ligneLog, Graph &unGraphe, int heure);
 
     //----------------------------------------------------- Attributs privés
     string nomFichier;
